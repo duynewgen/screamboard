@@ -7,7 +7,6 @@ import { useScream } from "../hooks/useScream";
 function resolveScream(key: string): { speak: string; display: string } | null {
   if (key === " ") return { speak: "space!", display: "SPACE" };
   if (key === "Enter") return { speak: "enter!", display: "ENTER" };
-  // Printable characters only (letters, digits, punctuation)
   if (key.length === 1 && key >= " ") {
     return { speak: key, display: key };
   }
@@ -56,39 +55,61 @@ export function ScreamZone() {
   }, [speak]);
 
   return (
-    <div
-      className={`relative flex min-h-dvh flex-col ${flashing ? "animate-bg-flash" : ""}`}
-    >
+    <div className="relative flex min-h-dvh flex-col overflow-hidden bg-background">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.35]"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 1px 1px, var(--ink-soft) 1px, transparent 0)",
+          backgroundSize: "22px 22px",
+        }}
+      />
+      <div
+        aria-hidden
+        className="animate-sun-drift pointer-events-none absolute -left-24 top-[-10%] h-[55vh] w-[55vh] rounded-full bg-[radial-gradient(circle,var(--sun)_0%,transparent_70%)] opacity-80"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-16 bottom-[-5%] h-[45vh] w-[45vh] rounded-full bg-[radial-gradient(circle,var(--accent-soft)_0%,transparent_70%)]"
+      />
+
+      <div
+        className={`absolute inset-0 ${flashing ? "animate-bg-flash" : ""}`}
+        aria-hidden
+      />
+
       <button
         type="button"
         onClick={toggleMute}
-        className="absolute right-4 top-4 z-30 font-[family-name:var(--font-display)] text-xl tracking-widest text-muted transition-colors hover:text-foreground"
+        className="absolute right-4 top-4 z-30 font-[family-name:var(--font-display)] text-xl tracking-widest text-muted transition-colors hover:text-accent"
         aria-pressed={muted}
         aria-label={muted ? "Unmute screams" : "Mute screams"}
       >
         {muted ? "UNMUTE" : "MUTE"}
       </button>
 
-      <main className="relative flex flex-1 flex-col items-center justify-center px-4 py-20">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--stage-glow)_0%,transparent_55%)]" />
-
-        <h1 className="relative z-10 mb-8 font-[family-name:var(--font-display)] text-5xl tracking-[0.2em] text-foreground sm:text-7xl">
+      <main className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 py-20">
+        <h1 className="animate-brand-wiggle mb-3 font-[family-name:var(--font-display)] text-6xl tracking-[0.12em] text-foreground sm:text-8xl">
           SCREAMBOARD
         </h1>
+        <p className="mb-10 max-w-md text-center text-base text-muted sm:text-lg">
+          Hit a key. It screams. That&apos;s it.
+        </p>
 
-        <div className="relative z-10 w-full max-w-3xl">
+        <div className="relative w-full max-w-3xl">
           <textarea
             ref={textareaRef}
             aria-label="Scream zone"
-            placeholder="type something. anything."
-            className="min-h-[40vh] w-full resize-none bg-transparent px-2 py-6 text-center font-[family-name:var(--font-display)] text-3xl leading-relaxed tracking-wide text-foreground/90 placeholder:text-muted/50 focus:outline-none sm:text-5xl"
+            placeholder="go on. type."
+            className="min-h-[36vh] w-full resize-none bg-transparent px-2 py-6 text-center font-[family-name:var(--font-display)] text-3xl leading-relaxed tracking-wide text-foreground placeholder:text-muted/45 focus:outline-none sm:text-5xl"
           />
         </div>
 
         <KeyFlash lastKey={lastKey} flashId={flashId} />
       </main>
 
-      <footer className="pb-6 text-center text-xs tracking-wide text-muted">
+      <footer className="relative z-10 pb-6 text-center text-xs tracking-wide text-muted">
         screamboard v0.1, built by duynewgen
       </footer>
     </div>
