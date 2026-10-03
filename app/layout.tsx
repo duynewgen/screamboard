@@ -1,32 +1,23 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, DM_Sans } from "next/font/google";
+import { Nunito } from "next/font/google";
 import "./globals.css";
 
-const display = Bebas_Neue({
-  weight: "400",
+// Free rounded fallback for Windows/Linux — Apple devices prefer SF Pro Rounded via the stack.
+const nunito = Nunito({
   subsets: ["latin"],
-  variable: "--font-display",
-});
-
-const body = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-body",
+  variable: "--font-nunito",
 });
 
 export const metadata: Metadata = {
   title: "Screamboard | Spam your keyboard. It screams.",
-  description:
-    "Spam your keyboard. It screams.",
+  description: "Spam your keyboard. It screams.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${display.variable} ${body.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${nunito.variable} h-full antialiased`}>
       <body
-        className="min-h-full flex flex-col bg-background text-foreground"
+        className="flex min-h-full flex-col bg-background font-sans text-foreground"
         suppressHydrationWarning
       >
         {children}

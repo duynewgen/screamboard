@@ -27,40 +27,40 @@ export function Landing() {
       />
 
       <header className="relative z-20 mx-auto flex w-full max-w-5xl items-center justify-between px-5 py-5 sm:px-8">
-        <span className="font-[family-name:var(--font-display)] text-xl tracking-[0.18em] text-foreground">
-          SCREAMBOARD
+        <span className="text-lg font-bold tracking-tight text-foreground">
+          Screamboard
         </span>
         <div className="flex items-center gap-5">
           <button
             type="button"
             onClick={toggleMute}
-            className="font-[family-name:var(--font-display)] text-sm tracking-[0.2em] text-muted transition-colors hover:text-accent"
+            className="text-sm font-semibold text-muted transition-colors hover:text-accent"
             aria-pressed={muted}
             aria-label={muted ? "Unmute screams" : "Mute screams"}
           >
-            {muted ? "UNMUTE" : "MUTE"}
+            {muted ? "Unmute" : "Mute"}
           </button>
           <a
             href="#desktop"
-            className="font-[family-name:var(--font-display)] text-sm tracking-[0.2em] text-foreground transition-colors hover:text-accent"
+            className="text-sm font-semibold text-foreground transition-colors hover:text-accent"
           >
-            GET THE APP
+            Get the app
           </a>
         </div>
       </header>
 
       <main className="relative z-10">
         <section className="mx-auto flex min-h-[calc(100dvh-4.5rem)] w-full max-w-5xl flex-col items-center px-5 pb-16 pt-10 text-center sm:px-8 sm:pt-16">
-          <h1 className="animate-fade-up font-[family-name:var(--font-display)] text-[clamp(3.5rem,14vw,7.5rem)] leading-[0.9] tracking-[0.08em] text-foreground">
-            SCREAMBOARD
+          <h1 className="animate-fade-up text-[clamp(3rem,12vw,6.5rem)] font-extrabold leading-[1.05] tracking-tight text-foreground">
+            Screamboard
           </h1>
-          <p className="animate-fade-up-delay mt-5 max-w-lg text-lg text-muted sm:text-xl">
+          <p className="animate-fade-up-delay mt-5 max-w-lg text-lg font-medium text-muted sm:text-xl">
             Hit a key. It screams. That&apos;s it. That&apos;s the demo.
           </p>
 
           <div className="animate-fade-up-delay-2 mt-12 flex w-full flex-col items-center">
-            <p className="mb-3 font-[family-name:var(--font-display)] text-sm tracking-[0.25em] text-accent">
-              TRY IT
+            <p className="mb-3 text-sm font-bold tracking-wide text-accent">
+              Try it
             </p>
             <ScreamZone speak={speak} />
           </div>
@@ -71,31 +71,31 @@ export function Landing() {
           className="relative border-t border-foreground/10 bg-surface"
         >
           <div className="mx-auto flex w-full max-w-3xl flex-col items-center px-5 py-24 text-center sm:px-8">
-            <p className="font-[family-name:var(--font-display)] text-sm tracking-[0.25em] text-accent">
-              THE REAL THING
+            <p className="text-sm font-bold tracking-wide text-accent">
+              The real thing
             </p>
-            <h2 className="mt-4 font-[family-name:var(--font-display)] text-4xl tracking-[0.06em] text-foreground sm:text-6xl">
+            <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-6xl">
               Want this in every app?
             </h2>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
+            <p className="mt-5 max-w-xl text-base font-medium leading-relaxed text-muted sm:text-lg">
               The desktop app listens while you work — Slack, docs, games, all of
               it. Drop in your own sounds. One-time $5. Mac, Windows, and Linux.
             </p>
             <button
               type="button"
               disabled
-              className="mt-10 cursor-not-allowed bg-foreground px-8 py-3 font-[family-name:var(--font-display)] text-lg tracking-[0.18em] text-background opacity-90"
+              className="mt-10 cursor-not-allowed bg-foreground px-8 py-3 text-lg font-bold text-background opacity-90"
             >
-              COMING SOON — $5
+              Coming soon — $5
             </button>
-            <p className="mt-4 text-sm text-muted">
+            <p className="mt-4 text-sm font-medium text-muted">
               Download drops here. Browser demo stays free forever.
             </p>
           </div>
         </section>
       </main>
 
-      <footer className="relative z-10 border-t border-foreground/10 px-5 py-8 text-center text-xs tracking-wide text-muted">
+      <footer className="relative z-10 border-t border-foreground/10 px-5 py-8 text-center text-xs font-medium tracking-wide text-muted">
         screamboard v0.1, built by duynewgen
       </footer>
     </div>

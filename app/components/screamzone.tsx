@@ -66,7 +66,7 @@ export function ScreamZone({ speak }: ScreamZoneProps) {
         aria-label="Try Screamboard"
         placeholder="click here. type anything."
         onKeyDown={handleKeyDown}
-        className="relative z-10 min-h-[28vh] w-full resize-none bg-transparent px-3 py-8 text-center font-[family-name:var(--font-display)] text-3xl leading-relaxed tracking-wide text-foreground placeholder:text-muted/40 focus:outline-none sm:min-h-[32vh] sm:text-5xl"
+        className="relative z-10 min-h-[28vh] w-full resize-none bg-transparent px-3 py-8 text-center text-3xl font-bold leading-relaxed tracking-tight text-foreground placeholder:text-muted/40 focus:outline-none sm:min-h-[32vh] sm:text-5xl"
       />
     </div>
   );

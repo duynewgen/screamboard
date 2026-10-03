@@ -10,6 +10,9 @@
   --muted: #6f6248;
   --ink-soft: rgba(26, 18, 8, 0.07);
   --surface: rgba(255, 255, 255, 0.45);
+  /* SF Pro Rounded where available (Apple); Nunito elsewhere. Can't host SF files — Apple license. */
+  --font-sf-rounded: ui-rounded, "SF Pro Rounded", var(--font-nunito), "Segoe UI",
+    sans-serif;
 }
 
 @theme inline {
@@ -21,14 +24,14 @@
   --color-flash: var(--flash);
   --color-muted: var(--muted);
   --color-surface: var(--surface);
-  --font-sans: var(--font-body);
-  --font-display: var(--font-display);
+  --font-sans: var(--font-sf-rounded);
+  --font-display: var(--font-sf-rounded);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-body), system-ui, sans-serif;
+  font-family: var(--font-sf-rounded);
 }
 
 @keyframes key-pop {
