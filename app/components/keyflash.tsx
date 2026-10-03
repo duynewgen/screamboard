@@ -5,10 +5,6 @@ type KeyFlashProps = {
   flashId: number;
 };
 
-/**
- * Huge centered key display with scale/shake.
- * TODO: drive from last keypress + 300ms fade.
- */
 export function KeyFlash({ lastKey, flashId }: KeyFlashProps) {
   if (!lastKey) return null;
 

@@ -4,20 +4,56 @@ import { useEffect, useRef, useState } from "react";
 import { KeyFlash } from "./keyflash";
 import { useScream } from "../hooks/useScream";
 
-/**
- * The stage: textarea + key handling.
- * TODO: printable-key scream logic + bg flash.
- */
+function resolveScream(key: string): { speak: string; display: string } | null {
+  if (key === " ") return { speak: "space!", display: "SPACE" };
+  if (key === "Enter") return { speak: "enter!", display: "ENTER" };
+  // Printable characters only (letters, digits, punctuation)
+  if (key.length === 1 && key >= " ") {
+    return { speak: key, display: key };
+  }
+  return null;
+}
+
 export function ScreamZone() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const { muted, toggleMute } = useScream();
+  const { muted, toggleMute, speak } = useScream();
   const [lastKey, setLastKey] = useState<string | null>(null);
   const [flashId, setFlashId] = useState(0);
   const [flashing, setFlashing] = useState(false);
+  const flashTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     textareaRef.current?.focus();
   }, []);
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.ctrlKey || event.metaKey || event.altKey) return;
+
+      const resolved = resolveScream(event.key);
+      if (!resolved) return;
+
+      speak(resolved.speak);
+
+      setLastKey(resolved.display);
+      setFlashId((n) => n + 1);
+
+      setFlashing(false);
+      requestAnimationFrame(() => setFlashing(true));
+
+      if (flashTimerRef.current) clearTimeout(flashTimerRef.current);
+      flashTimerRef.current = setTimeout(() => {
+        setLastKey(null);
+        setFlashing(false);
+      }, 300);
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      if (flashTimerRef.current) clearTimeout(flashTimerRef.current);
+    };
+  }, [speak]);
 
   return (
     <div
@@ -46,13 +82,6 @@ export function ScreamZone() {
             aria-label="Scream zone"
             placeholder="type something. anything."
             className="min-h-[40vh] w-full resize-none bg-transparent px-2 py-6 text-center font-[family-name:var(--font-display)] text-3xl leading-relaxed tracking-wide text-foreground/90 placeholder:text-muted/50 focus:outline-none sm:text-5xl"
-            // Shell input only — scream wiring comes next
-            onChange={() => {
-              setFlashing(false);
-              requestAnimationFrame(() => setFlashing(true));
-              setLastKey("…");
-              setFlashId((n) => n + 1);
-            }}
           />
         </div>
 

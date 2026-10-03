@@ -2,14 +2,15 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-/**
- * Speech synthesis for screamboard.
- * TODO: wire speak / cancel / voice selection in the next pass.
- */
 export function useScream() {
   const [muted, setMuted] = useState(false);
   const [voicesReady, setVoicesReady] = useState(false);
   const voiceRef = useRef<SpeechSynthesisVoice | null>(null);
+  const mutedRef = useRef(muted);
+
+  useEffect(() => {
+    mutedRef.current = muted;
+  }, [muted]);
 
   useEffect(() => {
     if (typeof window === "undefined" || !("speechSynthesis" in window)) {
@@ -43,13 +44,24 @@ export function useScream() {
   }, []);
 
   const speak = useCallback(
-    (_text: string) => {
-      // TODO: cancel + SpeechSynthesisUtterance (pitch 2, rate 1.2)
-      void _text;
-      void muted;
-      void voicesReady;
+    (text: string) => {
+      if (mutedRef.current) return;
+      if (typeof window === "undefined" || !("speechSynthesis" in window)) {
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.pitch = 2;
+      utterance.rate = 1.2;
+      if (voiceRef.current) {
+        utterance.voice = voiceRef.current;
+      }
+
+      window.speechSynthesis.speak(utterance);
     },
-    [muted, voicesReady],
+    [],
   );
 
   const toggleMute = useCallback(() => {
