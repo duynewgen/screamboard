@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+:root {
+  --background: #070708;
+  --foreground: #f2f2f2;
+  --stage-glow: rgba(255, 70, 85, 0.18);
+  --flash: #1a0a0c;
+  --muted: #8a8a8f;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-stage-glow: var(--stage-glow);
+  --color-flash: var(--flash);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+@keyframes key-pop {
+  0% {
+    transform: scale(0.6) rotate(-4deg);
+    opacity: 0;
+  }
+  40% {
+    transform: scale(1.15) rotate(3deg);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1) rotate(-1deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.05) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+@keyframes bg-flash {
+  0% {
+    background-color: var(--flash);
+  }
+  100% {
+    background-color: var(--background);
+  }
+}
+
+.animate-key-pop {
+  animation: key-pop 300ms ease-out forwards;
+}
+
+.animate-bg-flash {
+  animation: bg-flash 300ms ease-out;
+}
