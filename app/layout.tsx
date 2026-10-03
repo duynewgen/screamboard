@@ -14,8 +14,8 @@ const body = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "screamboard v0.1",
-  description: "Every key you press gets screamed out loud. A joke app.",
+  title: "Screamboard | Hit the keyboard, hear the scream.",
+  description: "Hit the keyboard and it screams. Loud.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
