@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fff6d8;
+  --background: #fff9e8;
   --foreground: #1a1208;
   --accent: #ff2d55;
-  --accent-soft: rgba(255, 45, 85, 0.16);
+  --accent-soft: rgba(255, 45, 85, 0.14);
   --sun: #ffe566;
-  --flash: #ff8a3d;
-  --muted: #7a6a4a;
-  --ink-soft: rgba(26, 18, 8, 0.08);
+  --flash: #ffb065;
+  --muted: #6f6248;
+  --ink-soft: rgba(26, 18, 8, 0.07);
+  --surface: rgba(255, 255, 255, 0.45);
 }
 
 @theme inline {
@@ -19,6 +20,7 @@
   --color-sun: var(--sun);
   --color-flash: var(--flash);
   --color-muted: var(--muted);
+  --color-surface: var(--surface);
   --font-sans: var(--font-body);
   --font-display: var(--font-display);
 }
@@ -57,23 +59,24 @@ body {
   }
 }
 
-@keyframes brand-wiggle {
-  0%,
-  100% {
-    transform: rotate(-1.5deg);
-  }
-  50% {
-    transform: rotate(1.5deg);
-  }
-}
-
 @keyframes sun-drift {
   0%,
   100% {
     transform: translate3d(0, 0, 0) scale(1);
   }
   50% {
-    transform: translate3d(2%, -3%, 0) scale(1.05);
+    transform: translate3d(2%, -3%, 0) scale(1.04);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -85,10 +88,18 @@ body {
   animation: bg-flash 300ms ease-out;
 }
 
-.animate-brand-wiggle {
-  animation: brand-wiggle 2.8s ease-in-out infinite;
+.animate-sun-drift {
+  animation: sun-drift 10s ease-in-out infinite;
 }
 
-.animate-sun-drift {
-  animation: sun-drift 8s ease-in-out infinite;
+.animate-fade-up {
+  animation: fade-up 600ms ease-out both;
+}
+
+.animate-fade-up-delay {
+  animation: fade-up 600ms ease-out 120ms both;
+}
+
+.animate-fade-up-delay-2 {
+  animation: fade-up 600ms ease-out 220ms both;
 }

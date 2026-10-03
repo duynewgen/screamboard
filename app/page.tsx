@@ -1,5 +1,5 @@
-import { ScreamZone } from "./components/screamzone";
+import { Landing } from "./components/landing";
 
 export default function Home() {
-  return <ScreamZone />;
+  return <Landing />;
 }
